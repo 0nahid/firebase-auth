@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import {
-  getAuth, GoogleAuthProvider, signInWithPopup, GithubAuthProvider
+  getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup, signOut
 } from "firebase/auth";
 import { useState } from "react";
 import './App.css';
@@ -41,13 +41,24 @@ function App() {
         console.log(error);
       });
   }
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(
+        () => {
+          setUser({})
+        }
+      )
+  }
   return (
     <div className="App">
-      <button onClick={handleGoogleSignIn}>Sign In With Google</button>
-      <button onClick={handleGithubSignIn}>Sign In With Github</button>
+      {!user.name ? <div>
+        <button onClick={handleGoogleSignIn}>Sign In With Google</button>
+        <button onClick={handleGithubSignIn}>Sign In With Github</button>
+      </div> :
+        <button onClick={handleSignOut}>Sign Out</button>}
       <div>
         {
-          user.email && <div>
+          user.name && <div>
             <h1>Welcome {user.name}</h1>
             <p>Email : {user.email}</p>
             <img style={{ height: "100px", width: "100px", borderRadius: "50%" }} src={user.photo} alt="" />
