@@ -5,10 +5,11 @@ import {
 import { useState } from "react";
 import './App.css';
 import firebaseConfig from './Firebase/firebase.config';
+import Signup from "./SignUp/Signup";
 
 initializeApp(firebaseConfig)
 function App() {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
   const auth = getAuth()
   const GoogleProvider = new GoogleAuthProvider();
   const gitProvider = new GithubAuthProvider();
@@ -50,12 +51,15 @@ function App() {
       )
   }
   return (
-    <div className="App">
+    <div className="container">
+      <Signup />
+      <br /><br /><br /><br /><br />
+      <div>---------------------------------</div>
       {!user.name ? <div>
-        <button onClick={handleGoogleSignIn}>Sign In With Google</button>
-        <button onClick={handleGithubSignIn}>Sign In With Github</button>
+        <button className="btn btn-dark m-2" onClick={handleGoogleSignIn}>Sign In With Google</button>
+        <button className="btn btn-primary" onClick={handleGithubSignIn}>Sign In With Github</button>
       </div> :
-        <button onClick={handleSignOut}>Sign Out</button>}
+        <button className="btn btn-danger" onClick={handleSignOut}>Sign Out</button>}
       <div>
         {
           user.name && <div>
