@@ -56,7 +56,7 @@ function App() {
       <br /><br /><br /><br /><br />
       <div>---------------------------------</div>
       {!user.name ? <div>
-        <button className="btn btn-dark m-2" onClick={handleGoogleSignIn}>Sign In With Google</button>
+        <button className="btn btn-dark" onClick={handleGoogleSignIn}>Sign In With Google</button>
         <button className="btn btn-primary" onClick={handleGithubSignIn}>Sign In With Github</button>
       </div> :
         <button className="btn btn-danger" onClick={handleSignOut}>Sign Out</button>}
