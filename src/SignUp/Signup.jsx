@@ -1,11 +1,16 @@
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import React, { useState } from "react";
+
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const auth = getAuth();
+
   const handleEmailSignUp = (e) => {
-    console.log(
-      `form submitted.  your email is ${email} & password is ${password}`
-    );
+    createUserWithEmailAndPassword(auth, email, password).then((res) => {
+      const user = res.user;
+      console.log(user);
+    });
     e.preventDefault();
   };
   const handleEmailChange = (e) => {
@@ -14,7 +19,6 @@ const SignUp = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-
   return (
     <div className="row">
       <div className="col-6 m-auto">
@@ -51,7 +55,7 @@ const SignUp = () => {
             />
           </div>
           <button type="submit" className="btn btn-primary">
-            Signup
+            Sign Up
           </button>
         </form>
       </div>
